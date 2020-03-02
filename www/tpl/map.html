@@ -22,7 +22,7 @@
                   app_code: 'your_app_code'
               }).addTo(map);
 
-                $.getJSON("https://ciprest.div.lv/v1/6410c5e5-c0fb-4633-a30d-c8d70d3c53d9/country/c-1/memorials/gson",function(data){
+                $.getJSON("https://rest.memoriali.org/v1/6410c5e5-c0fb-4633-a30d-c8d70d3c53d9/country/c-1/memorials/gson",function(data){
                   var rodents = L.geoJson(data,{
                     pointToLayer: function(feature,latlng){
                       var marker = L.marker(latlng);
