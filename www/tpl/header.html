@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand d-none d-sm-block d-md-none" href="/">{{captions.project_title}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i> {{captions.menu_main}}</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bullseye"></i> {{captions.menu_reestrbk}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    {% for region in regions %}
+                    <a title="{{ captions.region_hint }}" class="dropdown-item" href="/region/{{ region.region_id }}"><i
+                            class="far fa-file-alt"></i> {{ region.region_name }}</a>
+                    {% endfor %}
+
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/map"><i class="fas fa-map-marked-alt"></i> {{captions.menu_map}}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">   
+        
+        <header class="blog-header py-3">
+
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                {% if bodyhtml!='memorial' %}
+                <div class="col-12 text-center">
+                   {{captions.project_title}}
+                </div>
+
+                {% endif %}
+                
+                {% if bodyhtml=='memorial' %}
+                <div class="col-12 text-center">
+                    <span class="blog-header-logo text-dark d-sm-none d-md-block"><i class="fas fa-monument" title="{{captions.mem_name}}"></i> {{ memorial.memorial.name }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+
+        {% if bodyhtml!='memorial' %}
+        
+        {% endif %}
+
+</div>
+
+

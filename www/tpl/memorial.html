@@ -1,0 +1,226 @@
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-12 blog-main">
+        
+        
+<div class="blog-post">
+<dl class="row">
+
+<dt class="col-sm-3">{{captions.mem_cardno}}</dt>
+<dd class="col-sm-9">{{memorial.memorial.number}}</dd>
+
+{% if memorial.memorial.type!='' %}
+<dt class="col-sm-3">{{captions.mem_type}}</dt>
+<dd class="col-sm-9">{{memorial.memorial.type}}</dd>
+{% endif %}
+
+{% if memorial.memorial.place!='' %}
+<dt class="col-sm-3">{{captions.mem_place}}</dt>
+<dd class="col-sm-9">{{memorial.memorial.place}}</dd>
+{% endif %}
+
+{% if memorial.memorial.size!='' and memorial.memorial.size>0 %}
+<dt class="col-sm-3">{{captions.mem_size}}</dt>
+<dd class="col-sm-9">{{memorial.memorial.size}} {{captions.mem_size_metric}}</dd>
+{% endif %}
+
+{% if memorial.memorial.description!='' %}
+<dt class="col-sm-3">{{captions.mem_desc}}</dt>
+<dd class="col-sm-9">{{memorial.memorial.description}}</dd>
+{% endif %}
+
+
+{% if memorial.memorial.gps_latitude!='' %}
+<dt class="col-sm-3">{{captions.mem_gps}}</dt>
+    <dd class="col-sm-9"><a style="vertical-align:middle; display:inline-block;" target="_blank" title="{{captions.mem_opengps}}" href="http://www.openstreetmap.org/?mlat={{memorial.memorial.gps_latitude}}&mlon={{memorial.memorial.gps_longitude}}&zoom=11">{{memorial.memorial.gps_latitude}}, {{memorial.memorial.gps_longitude}}</a><a style="vertical-align:middle; display:inline-block;" href="https://www.google.com/maps/search/?api=1&query={{memorial.memorial.gps_latitude}},{{memorial.memorial.gps_longitude}}" target="_blank"><img style="vertical-align: text-top; padding-left: 10px" src="{{ url_for('static',filename='images/google_maps.png') }}" title="{{captions.mem_opengpsgoogle}}"></a></dd>
+{% endif %}
+
+<dt class="col-sm-3 alert-warning">&nbsp;</dt>
+<dd class="col-sm-9">{{captions.mem_s_nameerror}}</dd>
+
+<dt class="col-sm-3 alert-danger">&nbsp;</dt>
+<dd class="col-sm-9">{{captions.mem_s_redundant}}</dd>
+
+<dt class="col-sm-3 alert-info">&nbsp;</dt>
+<dd class="col-sm-9">{{captions.mem_s_new}}</dd>
+
+</dl>
+
+</div>
+
+
+
+
+
+        <div class="blog-post">
+
+            <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">{{captions.s_zvanie}}</th>
+                      <th scope="col">{{captions.s_surname}}</th>
+                      <th scope="col">{{captions.s_name}}</th>
+                      <th scope="col">{{captions.s_forname}}</th>
+                      <th scope="col">{{captions.s_birthday}}</th>
+                      <th scope="col">{{captions.s_deathday}}</th>
+                      <th scope="col">{{captions.s_written}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                      {% set errors={'count':0} %}
+                      
+                      {% for s in memorial.soldiers %}
+                      {% set errorCount = errors.count + 1 %}
+                      {% set _ = errors.update({'count':errorCount}) %}
+
+                      {% set rowClass = "active" %}
+
+                      {% if s.wrong_place == 1 %}
+                      {% set rowClass = "alert-danger" %}
+                      {% endif %}
+
+                      {% if s.newly_found == 1 %}
+                      {% set rowClass = "alert-info" %}
+                      {% endif %}
+
+                      {% if s.name_error == 1 %}
+                      {% set rowClass = "alert-warning" %}
+                      {% endif %}
+
+                      <tr class="{{ rowClass }}" title="{% if rowClass == 'alert-warning' %} {{captions.mem_s_nameerror_hint}} {% endif %}{% if rowClass == 'alert-info' %} {{captions.mem_s_new_hint}} {% endif %}">
+                          <th scope="row">{{ loop.index + (memorial.current_page-1)*pagesize }}</th>
+                          <td class="svalue">{{ s.rank }}</td>
+                          <td class="svalue">{{ s.surname }}</td>
+                          <td class="svalue">{{ s.name }}</td>
+                          <td class="svalue">{{ s.forname }}</td>
+                          <td class="svalue">{{ s.birthdate }}</td>
+
+                          <td class="svalue">{% if s.deathdate %} {{ s.deathdate }} {% endif %}</td>
+
+
+                          <td class="svalue">{{ s.written }}</td>
+                      </tr>
+                      {% endfor %}
+
+
+
+                  </tbody>
+                </table>
+            </div>
+
+
+            <div class="table-responsive">
+            <nav>
+              <ul class="pagination">
+
+
+              {% if memorial.current_page > 9 %}
+                <li class="page-item">
+                    <a class="page-link" href="/memorial/{{memorial.memorial.id}}/1" title="{{captions.nav_first_page}}" aria-label="First">
+                    <span aria-hidden="true"><i class="fas fa-fast-backward"></i></i></span>
+                    <span class="sr-only">{{captions.nav_first_page}}</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                    {% set linkToPageNo = memorial.current_page % 10  %}
+                    <a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{ memorial.current_page - linkToPageNo - 1 }}" title="{{captions.nav_previous_page}}" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fas fa-backward"></i></span>
+                    <span class="sr-only">{{captions.nav_pr}}</span>
+                  </a>
+                </li>
+              {% endif %}
+                  
+                  {% if memorial.current_page <10 %}
+                  {% set activeButtonNo = memorial.current_page %}
+                  {% endif %}
+
+                  {% set pagesShift = 10 * (memorial.current_page // 10) %}
+
+                  {% set thisRange = 9 %}
+                  {% if memorial.current_page > 9 %}
+                  {% set thisRange = 10 %}
+                  {% endif %}
+
+                  {% for i in range(thisRange) %}
+
+                      {% if memorial.current_page > 9 %}
+                      {% if pagesShift + i <= memorial.total_pages %}
+                          {% set active = '' %}
+                          {% if pagesShift + i == memorial.current_page %}
+                          {% set active = ' active' %}
+                          {% endif %}
+
+                          <li class="page-item{{active}}"><a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{ pagesShift + i}}">{{ pagesShift + i}}</a></li>
+                      {% endif %}
+                      {% endif %}
+
+                      {% if memorial.current_page < 10 %}
+                      {% if pagesShift + i + 1 <= memorial.total_pages %}
+                          {% set active = '' %}
+                          {% if pagesShift + i + 1 == memorial.current_page %}
+                          {% set active = ' active' %}
+                          {% endif %}
+
+                          <li class="page-item{{active}}"><a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{ pagesShift + i + 1}}">{{ pagesShift + i + 1}}</a></li>
+                      {% endif %}
+                      {% endif %}
+
+
+
+                  {% endfor %}
+
+              {% if memorial.total_pages>9 %}
+
+
+                    {% if memorial.current_page < 10 %}
+                  <li class="page-item">
+                    <a class="page-link" href="/memorial/{{memorial.memorial.id}}/10" title="{{captions.nav_next_page}}" aria-label="Next">
+                    <span aria-hidden="true"><i class="fas fa-forward"></i></span>
+                    <span class="sr-only">{{captions.nav_nx}}</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{memorial.total_pages}}" title="{{captions.nav_last_page}}" aria-label="Last">
+                    <span aria-hidden="true"><i class="fas fa-fast-forward"></i></span>
+                    <span class="sr-only">{{captions.nav_last_page}}</span>
+                    </a>
+                  </li>
+                    {% else %}
+                     {% set linkToPageNo = memorial.current_page % 10  %}
+                     {% if memorial.current_page + ( 10 - linkToPageNo ) <= memorial.total_pages %}
+                  <li class="page-item">
+                         <a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{ memorial.current_page + ( 10 - linkToPageNo ) }}" title="{{captions.nav_next_page}}" aria-label="Next">
+                         <span aria-hidden="true"><i class="fas fa-forward"></i></span>
+                         <span class="sr-only">{{captions.nav_nx}}</span>
+                         </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/memorial/{{memorial.memorial.id}}/{{memorial.total_pages}}" title="{{captions.nav_last_page}}" aria-label="Last">
+                    <span aria-hidden="true"><i class="fas fa-fast-forward"></i></span>
+                    <span class="sr-only">{{captions.nav_last_page}}</span>
+                    </a>
+                  </li>
+                     {% endif %}
+                    {% endif %}
+
+
+              {% endif %}
+
+
+              </ul>
+            </nav>
+            </div>
+
+        </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+
+
+    </div><!-- /.row -->
+</main><!-- /.container -->
+
+

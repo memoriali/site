@@ -1,0 +1,40 @@
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+            <div class="blog-post">
+                <h4><a title="{{ captions.alldistricts }}" href="/region/{{ memorials[0].id_klokrug }}">{{ memorials[0].region_name.split(', ')[0] }}</a>, {{ memorials[0].region_name.split(', ')[1] }}</h4>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">{{ captions.mem_regnr }}</th>
+                                <th scope="col">{{ captions.mem_name }}</th>
+                                <th scope="col">{{ captions.soldiercount }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in memorials %}
+                            <tr> 
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{m.memorial_number}}</td>
+                                <td><a href="/memorial/{{m.memorial_id}}/1">{{ m.memorial_name }}</a></td>
+                                <td>{{m.soldiers_count}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div><!-- /.blog-post -->
+
+
+        </div><!-- /.blog-main -->
+
+        {% include 'sidebar.html' %}
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->

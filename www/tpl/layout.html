@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        {% set pageTitle=captions.project_title %}
+        {% if bodyhtml=='memorial' %}
+
+        {% set pageTitle=captions.mem_name ~ " " ~ memorial.memorial.name  ~ " - " ~ captions.page_prefix ~ " " ~ currentPageNo %}
+        <title>{{pageTitle}}</title>
+
+        {% endif %}
+
+        {% if bodyhtml=='about' %}
+        <title>{{captions.menu_about}} "{{captions.project_cip}}"</title>
+        {% endif %}
+
+        {% if bodyhtml=='district' %}
+        <title>{{ memorials[0].region_name.split(', ')[0] }}, {{ memorials[0].region_name.split(', ')[1] }}</title>
+        {% endif %}
+
+        {% if bodyhtml=='region' %}
+        <title>{{region.region_name}}</title>
+        {% endif %}
+
+        {% if bodyhtml=='map' %}
+        <title>{{captions.menu_map}}</title>
+        {% endif %}
+
+        {% if bodyhtml=='contacts' %}
+        <title>{{captions.menu_contacts}}</title>
+        {% endif %}
+
+
+
+
+        {% if bodyhtml=='main' %}
+        <title>{{pageTitle}}</title>
+        {% endif %}
+
+
+
+        <meta name="robots" content="INDEX, FOLLOW">
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css"
+              media="screen, projection" />
+
+
+        {% if bodyhtml=='map' %}
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/leaflet.css') }}" type="text/css"  />
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/markercluster.css') }}" type="text/css" media="screen, projection" />
+        {% endif %}
+        
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/blog.css') }}" type="text/css"
+              media="screen, projection" />
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/cip.css') }}" type="text/css"
+              media="screen, projection" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+              crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300&amp;subset=cyrillic" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Vollkorn&amp;subset=cyrillic" rel="stylesheet"> 
+        <script type="text/javascript">
+            function scrollToTop() {
+                $('html, body').animate({
+                                            scrollTop: $("#body").offset().top
+                                        }, 1000);
+            }
+        </script>
+
+        <script
+                src="//code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+
+        
+        {% if bodyhtml=='map' %}
+
+        <script src="{{ url_for('static',filename='js/leaflet.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/leaflet-providers.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/leaflet.markercluster.js') }}"></script>
+
+        <style>
+          #map{ width: 100%; height: 450px; }
+        </style>
+
+        {% endif %}
+
+
+    </head>
+    <body id="body">
+        {% include 'header.html' %}
+
+        {% if bodyhtml=='main' %}
+
+        {% if featured==1 %}
+        {% include 'featured_article.html' %}
+        {% endif %}
+
+        {% if showslides==1 %}
+        {% include 'slides.html' %}
+        {% endif %}
+
+        {% include 'totals.html' %}
+        {% include 'main.html' %}
+
+        {% endif %}
+
+        {% if bodyhtml=='region' %}
+        {% include 'region.html' %}
+        {% endif %}
+
+        {% if bodyhtml=='map' %}
+        {% include 'map.html' %}
+        {% endif %}
+
+        {% if bodyhtml=='district' %}
+        {% include 'district.html' %}
+        {% endif %}
+
+        {% if bodyhtml=='soldier' %}
+        {% include 'soldier.html' %}
+        {% endif %}
+
+        {% if bodyhtml=='memorial' %}
+        {% include 'memorial.html' %}
+        {% endif %}
+
+        {% if bodyhtml=='total' %}
+        {% include 'total.html' %}
+        {% endif %}
+
+        {% include 'footer.html' %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+        <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+
+        {% if bodyhtml in ('main', 'map') %}
+
+        <script src="{{ url_for('static',filename='js/anicount.js') }}"></script>
+
+        {% endif %}
+
+        <script type="text/javascript">
+        </script>
+<!-- #GTO -->
+    </body>
+
+</html>

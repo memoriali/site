@@ -1,0 +1,45 @@
+<main role="main" class="container">
+        
+    <div class="row">
+            
+        <div class="col-md-8 blog-main">
+
+                <div class="blog-post">
+                        
+                    <h3>{{region['region_name']}}</h3>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{{ captions.district_suffix.lower() | title }}</th>
+                                    <th scope="col">{{ captions.soldiercount }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for d in districts %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td><a href="/district/{{d.district_id}}">{{d.district_name}}
+                                        {% if d.is_city == 0 %}
+                                        {{captions.district_suffix}}
+                                        {% endif %}
+                                    </a></td>
+                                    <td>{{d.soldiers_count}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div><!-- /.blog-post -->
+            
+
+        </div><!-- /.blog-main -->
+
+        {% include 'sidebar.html' %}
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->
