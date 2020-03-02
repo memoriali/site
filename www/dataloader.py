@@ -12,7 +12,7 @@ class DataLoader:
     country = "c-1" # Latvia
 
     #RESTserver = "http://localhost:8080"
-    RESTserver = "https://ciprest.div.lv"
+    RESTserver = "https://rest.memoriali.org"
 
     totalsRestEndpoint = "%s/v1/%s/country/%s/totals" % (RESTserver, authToken, country)
     regionsRestEndpoint = "%s/v1/%s/country/%s/regions" % (RESTserver, authToken, country)
