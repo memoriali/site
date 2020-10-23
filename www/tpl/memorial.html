@@ -9,28 +9,28 @@
 <dt class="col-sm-3">{{captions.mem_cardno}}</dt>
 <dd class="col-sm-9">{{memorial.memorial.number}}</dd>
 
-{% if memorial.memorial.type!='' %}
+{% if memorial.memorial.type!=None and memorial.memorial.type!='' %}
 <dt class="col-sm-3">{{captions.mem_type}}</dt>
 <dd class="col-sm-9">{{memorial.memorial.type}}</dd>
 {% endif %}
 
-{% if memorial.memorial.place!='' %}
+{% if memorial.memorial.place!=None and memorial.memorial.place!='' %}
 <dt class="col-sm-3">{{captions.mem_place}}</dt>
 <dd class="col-sm-9">{{memorial.memorial.place}}</dd>
 {% endif %}
 
-{% if memorial.memorial.size!='' and memorial.memorial.size>0 %}
+{% if memorial.memorial.size!=None and memorial.memorial.size!='' and memorial.memorial.size>0 %}
 <dt class="col-sm-3">{{captions.mem_size}}</dt>
 <dd class="col-sm-9">{{memorial.memorial.size}} {{captions.mem_size_metric}}</dd>
 {% endif %}
 
-{% if memorial.memorial.description!='' %}
+{% if memorial.memorial.description!=None and memorial.memorial.description!='' %}
 <dt class="col-sm-3">{{captions.mem_desc}}</dt>
 <dd class="col-sm-9">{{memorial.memorial.description}}</dd>
 {% endif %}
 
 
-{% if memorial.memorial.gps_latitude!='' %}
+{% if memorial.memorial.gps_latitude!=None and memorial.memorial.gps_latitude!='' and memorial.memorial.gps_longitude!=None and memorial.memorial.gps_longitude!='' %}
 <dt class="col-sm-3">{{captions.mem_gps}}</dt>
     <dd class="col-sm-9"><a style="vertical-align:middle; display:inline-block;" target="_blank" title="{{captions.mem_opengps}}" href="http://www.openstreetmap.org/?mlat={{memorial.memorial.gps_latitude}}&mlon={{memorial.memorial.gps_longitude}}&zoom=11">{{memorial.memorial.gps_latitude}}, {{memorial.memorial.gps_longitude}}</a><a style="vertical-align:middle; display:inline-block;" href="https://www.google.com/maps/search/?api=1&query={{memorial.memorial.gps_latitude}},{{memorial.memorial.gps_longitude}}" target="_blank"><img style="vertical-align: text-top; padding-left: 10px" src="{{ url_for('static',filename='images/google_maps.png') }}" title="{{captions.mem_opengpsgoogle}}"></a></dd>
 {% endif %}
