@@ -23,7 +23,7 @@
                   language: 'rus',
               }).addTo(map);
 
-                $.getJSON("https://rest.memoriali.org/v1/#AUTHTOKEN#/country/c-1/memorials/gson",function(data){
+                $.getJSON("https://ciprest.memoriali.org/v1/#AUTHTOKEN#/country/c-1/memorials/gson",function(data){
                   var rodents = L.geoJson(data,{
                     pointToLayer: function(feature,latlng){
                       var marker = L.marker(latlng);
