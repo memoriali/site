@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# cipdemoweb stop script
+# cipdemoweb stop.sh script
 #
 docker stop $(docker ps -q --filter ancestor=cipdemoweb)
 #
