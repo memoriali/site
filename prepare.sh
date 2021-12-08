@@ -14,6 +14,7 @@ sed -i -- 's/#AUTHTOKEN#/547cfc9c-21b0-4309-a4e2-d1c945856dd9/g' ./www/dataloade
 sed -i -- 's/#AUTHTOKEN#/547cfc9c-21b0-4309-a4e2-d1c945856dd9/g' ./www/tpl/map.html
 # Default test Region ID
 sed -i -- 's/#COUNTRYID#/c-16/g' ./www/dataloader.py
+sed -i -- 's/#COUNTRYID#/c-16/g' ./www/tpl/map.html
 # Default test REST Service address
 sed -i -- 's/#RESTSERVICEADDRESS#/ciprest.memoriali.org/g' ./www/dataloader.py
 #
