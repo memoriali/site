@@ -8,11 +8,11 @@ class DataLoader:
 
     cacheEnabled = False
     # Auth Token for REST services. To be implemented...
-    authToken = "6410c5e5-c0fb-4633-a30d-c8d70d3c53d9" # Default Test Latvian token
-    country = "c-1" # Latvia
+    authToken = "#AUTHTOKEN#" # <-- see the "prepare.sh" for replacements
+    country = "#COUNTRYID#" # <-- see the "prepare.sh" for replacements
 
-    #RESTserver = "http://localhost:8080"
-    RESTserver = "https://rest.memoriali.org"
+    #RESTserver = "http://localhost:8080" # <-- for local development
+    RESTserver = "https://#RESTSERVICEADDRESS#" # <-- see the "prepare.sh" for replacements
 
     totalsRestEndpoint = "%s/v1/%s/country/%s/totals" % (RESTserver, authToken, country)
     regionsRestEndpoint = "%s/v1/%s/country/%s/regions" % (RESTserver, authToken, country)
