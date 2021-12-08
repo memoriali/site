@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.9-alpine
 
 COPY ./www/ /app/
 COPY ./requirements.txt /app/requirements.txt
