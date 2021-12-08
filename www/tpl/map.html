@@ -15,14 +15,15 @@
               
                 // initialize the map
                 // This is GPS center point for Latvia. Use your location here.
-                var map = L.map('map').setView([56.974325, 24.699127], 7);
+                var map = L.map('map').setView([#MAPCENTER#], 7);
 
                   L.tileLayer.provider('HERE.terrainDay', {
                   app_id: 'your_app_id',
-                  app_code: 'your_app_code'
+                  app_code: 'your_app_code',
+                  language: 'rus',
               }).addTo(map);
 
-                $.getJSON("https://rest.memoriali.org/v1/6410c5e5-c0fb-4633-a30d-c8d70d3c53d9/country/c-1/memorials/gson",function(data){
+                $.getJSON("https://rest.memoriali.org/v1/#AUTHTOKEN#/country/c-1/memorials/gson",function(data){
                   var rodents = L.geoJson(data,{
                     pointToLayer: function(feature,latlng){
                       var marker = L.marker(latlng);
