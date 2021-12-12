@@ -78,10 +78,6 @@
 
                       {% set rowClass = "active" %}
 
-                      {% if s.wrong_place == 1 %}
-                      {% set rowClass = "alert-danger" %}
-                      {% endif %}
-
                       {% if s.newly_found == 1 %}
                       {% set rowClass = "alert-info" %}
                       {% endif %}
@@ -90,7 +86,11 @@
                       {% set rowClass = "alert-warning" %}
                       {% endif %}
 
-                      <tr class="{{ rowClass }}" title="{% if rowClass == 'alert-warning' %} {{captions.mem_s_nameerror_hint}} {% endif %}{% if rowClass == 'alert-info' %} {{captions.mem_s_new_hint}} {% endif %}">
+                      {% if s.wrong_place == 1 %}
+                      {% set rowClass = "alert-danger" %}
+                      {% endif %}
+
+                      <tr class="{{ rowClass }}" title="{% if rowClass == 'alert-warning' %} {{captions.mem_s_nameerror_hint}} {% endif %}{% if rowClass == 'alert-info' %} {{captions.mem_s_new_hint}} {% endif %}{% if rowClass == 'alert-danger' %} {{captions.mem_s_wrong_hint}} {% endif %}">
                           <th scope="row">{{ loop.index + (memorial.current_page-1)*pagesize }}</th>
                           <td class="svalue">{{ s.rank }}</td>
                           <td class="svalue">{{ s.surname }}</td>
